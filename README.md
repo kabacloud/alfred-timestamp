@@ -27,3 +27,9 @@ Usage: ts \<duration\>
 - 2006-01-02 15:04:05
 - 2006-01-02T15:04:05Z07:00
 - Mon, 02 Jan 2006 15:04:05
+
+## Install
+
+Download [alfred-workflow_kaba-ts.alfredworkflow](https://github.com/kabacloud/alfred-timestamp/raw/main/alfred-workflow_kaba-ts.alfredworkflow)
+
+Double-click the alfred-workflow_kaba-ts.alfredworkflow to install.
