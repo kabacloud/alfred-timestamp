@@ -1,0 +1,50 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+		// 禁用Markdown检查重复标题的规则MD024
+		"markdownlint.config": {
+			// Multiple headings with the same contentmarkdownlint(MD024)
+			"MD024": false
+		},
+		// gopls配置
+		"gopls": {
+			// 使用gofumpt做format
+			"formatting.gofumpt": true,
+		},
+		"licenseInjector.ignore": "node_modules,bin,vendor"
+	},
+	"launch": {
+		"configurations": [{
+			"name": "Debug",
+			"type": "go",
+			"request": "launch",
+			"mode": "debug",
+			"host": "127.0.0.1",
+			"program": "${workspaceFolder}/main.go",
+			"cwd": "${workspaceFolder}",
+			"env": {
+			},
+			"args": ["+"]
+		},{
+			"name": "Debug alfred",
+			"type": "go",
+			"request": "launch",
+			"mode": "debug",
+			"host": "127.0.0.1",
+			"program": "${workspaceFolder}/main.go",
+			"cwd": "${workspaceFolder}",
+			"env": {
+				"alfred_workflow_bundleid": "com.kaba-tech.alfred.ts",
+				"alfred_workflow_cache": "${env:HOME}/Library/Caches/com.runningwithcrayons.Alfred/Workflow Data/com.kaba-tech.alfred.ts",
+				"alfred_workflow_data": "${env:HOME}/Library/Application Support/Alfred/Workflow Data/com.kaba-tech.alfred.ts",
+				// "alfred_workflow_version": "3.0.0",
+			},
+			"args": ["alfred","+5d"]
+		}],
+		"compounds": []
+	}
+}
