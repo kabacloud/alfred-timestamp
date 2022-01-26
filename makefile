@@ -28,7 +28,9 @@ mod: # 整理vendor依赖包
 	$(GOCMD) mod vendor
 build: clean format ## 编译应用
 	$(GOBUILD) -o $(BINARY_NAME)
-deploy: build
+sign: build
+	codesign -s 7E4F2349510B6CAA6E8070D01CA2FEE79E045BA1 -o runtime -v $(BINARY_NAME)
+test: build
 	cp icon.png ~/0.exclude-backup/baidupan-sync/Alfred/Alfred.alfredpreferences/workflows/user.workflow.E3DCA694-E8EB-46CB-9818-472329A14669/icon.png
 	cp $(BINARY_NAME) ~/0.exclude-backup/baidupan-sync/Alfred/Alfred.alfredpreferences/workflows/user.workflow.E3DCA694-E8EB-46CB-9818-472329A14669/ts
 run: build
