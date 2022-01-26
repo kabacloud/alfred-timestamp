@@ -15,7 +15,7 @@ GOTEST=$(GOCMD) test
 BINARY_NAME=ts
 
 # 声明命令列表，避免和同名文件冲突
-.PHONY: all clean format mod build help
+.PHONY: all clean format mod build sign package help
 
 all: help
 
@@ -33,6 +33,9 @@ sign: build
 test: build
 	cp icon.png ~/0.exclude-backup/baidupan-sync/Alfred/Alfred.alfredpreferences/workflows/user.workflow.E3DCA694-E8EB-46CB-9818-472329A14669/icon.png
 	cp $(BINARY_NAME) ~/0.exclude-backup/baidupan-sync/Alfred/Alfred.alfredpreferences/workflows/user.workflow.E3DCA694-E8EB-46CB-9818-472329A14669/ts
+package:
+	zip alfred-workflow_kaba-ts.alfredworkflow icon.png info.plist ts
+
 run: build
 	$(BINARY_NAME)
 help: ## 帮助信息
