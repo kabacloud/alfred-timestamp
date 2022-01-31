@@ -28,14 +28,14 @@ mod: # 整理vendor依赖包
 	$(GOCMD) mod vendor
 build: clean format ## 编译应用
 	$(GOBUILD) -o $(BINARY_NAME)
-sign: build
-	codesign -s 7E4F2349510B6CAA6E8070D01CA2FEE79E045BA1 -o runtime -v $(BINARY_NAME)
-test: build
-	cp icon.png ~/0.exclude-backup/baidupan-sync/Alfred/Alfred.alfredpreferences/workflows/user.workflow.E3DCA694-E8EB-46CB-9818-472329A14669/icon.png
-	cp $(BINARY_NAME) ~/0.exclude-backup/baidupan-sync/Alfred/Alfred.alfredpreferences/workflows/user.workflow.E3DCA694-E8EB-46CB-9818-472329A14669/ts
-package:
+package: build
 	zip alfred-workflow_kaba-ts.alfredworkflow icon.png info.plist ts
+sign: package ## 公证应用
+	gon -log-level=debug config.hcl
 
+test: build
+	cp icon.png YourAlfred/Alfred.alfredpreferences/workflows/user.workflow.8B923D12-B113-404F-992D-822E66258E00/icon.png
+	cp $(BINARY_NAME) YourAlfred/Alfred.alfredpreferences/workflows/user.workflow.8B923D12-B113-404F-992D-822E66258E00/ts
 run: build
 	$(BINARY_NAME)
 help: ## 帮助信息

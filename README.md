@@ -22,7 +22,7 @@ Usage: ts \<duration\>
 
 **Output Format:**
 
-- int
+- int64 (timestamp)
 - 2006-01-02
 - 2006-01-02 15:04:05
 - 2006-01-02T15:04:05Z07:00
@@ -33,3 +33,12 @@ Usage: ts \<duration\>
 Download [alfred-workflow_kaba-ts.alfredworkflow](https://github.com/kabacloud/alfred-timestamp/raw/main/alfred-workflow_kaba-ts.alfredworkflow)
 
 Double-click the alfred-workflow_kaba-ts.alfredworkflow to install.
+
+## Develop
+
+>Please refer to <https://github.com/mitchellh/gon>
+
+change your apple developer information in `config.json`.
+
+- run command `security find-identity -v` get your Developer ID Application certificate information.
+- run command `xcrun altool --list-providers -u "your apple id" -p "your App-Specific Password"` get your ProviderShortname.
