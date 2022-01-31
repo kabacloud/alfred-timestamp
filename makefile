@@ -30,6 +30,11 @@ build: clean format ## 编译应用
 	$(GOBUILD) -o $(BINARY_NAME)
 package: build
 	zip alfred-workflow_kaba-ts.alfredworkflow icon.png info.plist ts
+# https://github.com/mitchellh/gon
+# https://www.simpletraveler.jp/2021/09/20/iosapp-troubleshooting-upload-buildfile-with-altool-error/
+# https://qiita.com/yofuru/items/c0ec015a191264106931
+# `security find-identity -v`
+# `xcrun altool --list-providers -u "woshizilong@hotmail.com" -p "yqna-imle-jsnx-abzu"`
 sign: package ## 公证应用
 	gon -log-level=debug config.hcl
 
