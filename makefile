@@ -14,6 +14,10 @@ GOTEST=$(GOCMD) test
 
 BINARY_NAME=ts
 
+# 从 keychain 中获取 Apple Developer 信息
+AC_USERNAME=$(shell security find-generic-password -w -s 'AC_USERNAME' -a 'gon sign')
+AC_PROVIDER=$(shell security find-generic-password -w -s 'AC_PROVIDER' -a 'gon sign')
+
 # 声明命令列表，避免和同名文件冲突
 .PHONY: all clean format mod build sign package help
 
@@ -30,13 +34,9 @@ build: clean format ## 编译应用
 	$(GOBUILD) -o $(BINARY_NAME)
 package: build
 	zip alfred-workflow_kaba-ts.alfredworkflow icon.png info.plist ts
-# https://github.com/mitchellh/gon
-# https://www.simpletraveler.jp/2021/09/20/iosapp-troubleshooting-upload-buildfile-with-altool-error/
-# https://qiita.com/yofuru/items/c0ec015a191264106931
-# `security find-identity -v`
-# `xcrun altool --list-providers -u "woshizilong@hotmail.com" -p "yqna-imle-jsnx-abzu"`
+
 sign: package ## 公证应用
-	gon -log-level=debug config.hcl
+	AC_USERNAME=$(AC_USERNAME) AC_PROVIDER=$(AC_PROVIDER) gon -log-level=debug config.hcl
 
 test: build
 	cp icon.png YourAlfred/Alfred.alfredpreferences/workflows/user.workflow.8B923D12-B113-404F-992D-822E66258E00/icon.png
